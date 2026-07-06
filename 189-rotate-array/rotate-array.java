@@ -1,17 +1,24 @@
 class Solution {
+
+    //here we just modified nums array whithout using any temp  array as previous so space comp reduced but time complexity of O(2n) is same for both soln
+    
     public void rotate(int[] nums, int k) {
         int n=nums.length;
         k=k%n;
 
-        int temp[] = new int[n];                         //space complexity high 
-        for(int i=0;i<n;i++){
-            int newIndex=(i+k)%n;
+        reverse(nums,0,n-1);            
+        reverse(nums,0,k-1);
+        reverse(nums,k,n-1);
+    }
+    public void reverse(int[] nums, int start,int end){
+       
 
-            temp[newIndex]=nums[i];
-
-        }
-        for(int i=0;i<n;i++){
-            nums[i]=temp[i];
+        while(start<=end){
+            int temp=nums[start];
+            nums[start]=nums[end];
+            nums[end]=temp;
+            start++;
+            end--;
         }
     }
 }
